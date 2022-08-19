@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    alicloud:
+      access-key: LTAI5tB2prECwJmcR6Vyzvf6
+      secret-key: M4xcipRLMhH9arq9wgYnsJYjaprhkw
+      oss:
+        endpoint: oss-cn-beijing.aliyuncs.com
+        bucket: xingtaomall
+
+  application:
+    name: xingtaomall-third-party
+
+server:
+  port: 30000

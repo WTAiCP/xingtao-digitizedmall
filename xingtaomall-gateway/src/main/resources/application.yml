@@ -1,0 +1,90 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: test_route
+          uri: https://www.baidu.com
+          predicates:
+            - Query=url,baidu
+
+        - id: product_route
+          uri: lb://xingtaomall-product
+          predicates:
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+
+        - id: member_route
+          uri: lb://xingtaomall-member
+          predicates:
+            - Path=/api/member/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+
+        - id: third_party_route
+          uri: lb://xingtaomall-third-party
+          predicates:
+            - Path=/api/thirdparty/**
+          filters:
+            - RewritePath=/api/thirdparty/(?<segment>.*), /$\{segment}
+
+        - id: coupon_route
+          uri: lb://xingtaomall-coupon
+          predicates:
+            - Path=/api/coupon/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+
+        - id: ware_route
+          uri: lb://xingtaomall-ware
+          predicates:
+            - Path=/api/ware/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+
+        - id: admin_route
+          uri: lb://renren-fast
+          predicates:
+          - Path=/api/**
+          filters:
+          - RewritePath=/api/(?<segment>.*), /renren-fast/$\{segment}
+
+        ##配置nginx转到网关
+        - id: xingtaomall_host_route
+          uri: lb://xingtaomall-product
+          predicates:
+            - Host=xingtaomall.com,item.xingtaomall.com
+
+        - id: xingtaomall_search_route
+          uri: lb://xingtaomall-search
+          predicates:
+            - Host=search.xingtaomall.com
+
+        - id: xingtaomall_auth_server
+          uri: lb://xingtaomall-auth-server
+          predicates:
+            - Host=auth.xingtaomall.com
+
+        - id: xingtaomall_cart_route
+          uri: lb://xingtaomall-cart
+          predicates:
+            - Host=cart.xingtaomall.com
+
+        - id: xingtaomall_order_route
+          uri: lb://xingtaomall-order
+          predicates:
+            - Host=order.xingtaomall.com
+
+        - id: xingtaomall_member_route
+          uri: lb://xingtaomall-member
+          predicates:
+            - Host=member.xingtaomall.com
+
+        - id: xingtaomall_seckill_route
+          uri: lb://xingtaomall-seckill
+          predicates:
+            - Host=seckill.xingtaomall.com
+
+          ##http://localhost:88/api/captcha.jpg
+## 前端项目，/api
+
